@@ -14,6 +14,11 @@ public class CreateTweetDelegate implements JavaDelegate {
     public void execute(DelegateExecution execution) throws Exception {
         String content = (String) execution.getVariable("content");
 
+        if(content.equals("Runtime error")){
+            throw new RuntimeException("simulated network error");
+        }
+
+
         LOGGER.info("Publishing tweet: " + content);
         AccessToken accessToken = new AccessToken("220324559-CO8TfUmrcoCrvFHP4TacgToN5hLC8cMw4n2EwmHo", "WvVureFv5TBWTGhESgGe3fqZM7XbGMuyIhxB84zgcoUER");
         Twitter twitter = new TwitterFactory().getInstance();

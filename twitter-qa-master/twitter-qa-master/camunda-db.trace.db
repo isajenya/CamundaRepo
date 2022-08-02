@@ -1,0 +1,553 @@
+2022-08-02 17:47:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "LAST_FAILURE_LOG_ID_" не найден
+Column "LAST_FAILURE_LOG_ID_" not found; SQL statement:
+update ACT_RU_JOB
+     SET REV_ =  ?,
+       EXECUTION_ID_ = ?,
+       LOCK_EXP_TIME_ = ?,
+       LOCK_OWNER_ = ?,
+       RETRIES_ = ?,
+       EXCEPTION_STACK_ID_ = ?,
+       EXCEPTION_MSG_ = ?,
+       FAILED_ACT_ID_ = ?,
+       DUEDATE_ = ?,
+       SUSPENSION_STATE_ = ?,
+       PROCESS_DEF_ID_ = ?,
+       PROCESS_DEF_KEY_ = ?,
+       JOB_DEF_ID_ = ?,
+       DEPLOYMENT_ID_ = ?,
+       HANDLER_CFG_ = ?,
+       PRIORITY_ = ?,
+       SEQUENCE_COUNTER_ = ?,
+       LAST_FAILURE_LOG_ID_ = ? 
+    where ID_= ?
+      and REV_ = ? [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.command.Parser.readTableColumn(Parser.java:1274)
+	at org.h2.command.Parser.parseUpdateSetClause(Parser.java:1325)
+	at org.h2.command.Parser.parseUpdate(Parser.java:1290)
+	at org.h2.command.Parser.parsePrepared(Parser.java:1005)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:337)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at jdk.internal.reflect.GeneratedMethodAccessor41.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy$TransactionAwareInvocationHandler.invoke(TransactionAwareDataSourceProxy.java:238)
+	at jdk.proxy2/jdk.proxy2.$Proxy71.prepareStatement(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.instantiateStatement(PreparedStatementHandler.java:86)
+	at org.apache.ibatis.executor.statement.BaseStatementHandler.prepare(BaseStatementHandler.java:88)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.prepare(RoutingStatementHandler.java:59)
+	at org.apache.ibatis.executor.BatchExecutor.doUpdate(BatchExecutor.java:70)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.camunda.bpm.engine.impl.db.sql.DbSqlSession.executeUpdate(DbSqlSession.java:402)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.updateEntity(BatchDbSqlSession.java:256)
+	at org.camunda.bpm.engine.impl.db.AbstractPersistenceSession.executeDbOperation(AbstractPersistenceSession.java:55)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.executeDbOperations(BatchDbSqlSession.java:62)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperations(DbEntityManager.java:341)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperationManager(DbEntityManager.java:323)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flush(DbEntityManager.java:295)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.flushSessions(CommandContext.java:272)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.close(CommandContext.java:188)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:119)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:72)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.ProcessApplicationContextInterceptor.execute(ProcessApplicationContextInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.CommandCounterInterceptor.execute(CommandCounterInterceptor.java:35)
+	at org.camunda.bpm.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:33)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.callFailedJobListenerWithRetries(ExecuteJobHelper.java:112)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.invokeJobListener(ExecuteJobHelper.java:93)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.executeJob(ExecuteJobHelper.java:74)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.executeJob(ExecuteJobsRunnable.java:110)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.run(ExecuteJobsRunnable.java:71)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-08-02 17:52:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "LAST_FAILURE_LOG_ID_" не найден
+Column "LAST_FAILURE_LOG_ID_" not found; SQL statement:
+update ACT_RU_JOB
+     SET REV_ =  ?,
+       EXECUTION_ID_ = ?,
+       LOCK_EXP_TIME_ = ?,
+       LOCK_OWNER_ = ?,
+       RETRIES_ = ?,
+       EXCEPTION_STACK_ID_ = ?,
+       EXCEPTION_MSG_ = ?,
+       FAILED_ACT_ID_ = ?,
+       DUEDATE_ = ?,
+       SUSPENSION_STATE_ = ?,
+       PROCESS_DEF_ID_ = ?,
+       PROCESS_DEF_KEY_ = ?,
+       JOB_DEF_ID_ = ?,
+       DEPLOYMENT_ID_ = ?,
+       HANDLER_CFG_ = ?,
+       PRIORITY_ = ?,
+       SEQUENCE_COUNTER_ = ?,
+       LAST_FAILURE_LOG_ID_ = ? 
+    where ID_= ?
+      and REV_ = ? [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.command.Parser.readTableColumn(Parser.java:1274)
+	at org.h2.command.Parser.parseUpdateSetClause(Parser.java:1325)
+	at org.h2.command.Parser.parseUpdate(Parser.java:1290)
+	at org.h2.command.Parser.parsePrepared(Parser.java:1005)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:337)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at jdk.internal.reflect.GeneratedMethodAccessor41.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy$TransactionAwareInvocationHandler.invoke(TransactionAwareDataSourceProxy.java:238)
+	at jdk.proxy2/jdk.proxy2.$Proxy71.prepareStatement(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.instantiateStatement(PreparedStatementHandler.java:86)
+	at org.apache.ibatis.executor.statement.BaseStatementHandler.prepare(BaseStatementHandler.java:88)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.prepare(RoutingStatementHandler.java:59)
+	at org.apache.ibatis.executor.BatchExecutor.doUpdate(BatchExecutor.java:70)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.camunda.bpm.engine.impl.db.sql.DbSqlSession.executeUpdate(DbSqlSession.java:402)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.updateEntity(BatchDbSqlSession.java:256)
+	at org.camunda.bpm.engine.impl.db.AbstractPersistenceSession.executeDbOperation(AbstractPersistenceSession.java:55)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.executeDbOperations(BatchDbSqlSession.java:62)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperations(DbEntityManager.java:341)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperationManager(DbEntityManager.java:323)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flush(DbEntityManager.java:295)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.flushSessions(CommandContext.java:272)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.close(CommandContext.java:188)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:119)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:72)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.ProcessApplicationContextInterceptor.execute(ProcessApplicationContextInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.CommandCounterInterceptor.execute(CommandCounterInterceptor.java:35)
+	at org.camunda.bpm.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:33)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.callFailedJobListenerWithRetries(ExecuteJobHelper.java:112)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.invokeJobListener(ExecuteJobHelper.java:93)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.executeJob(ExecuteJobHelper.java:74)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.executeJob(ExecuteJobsRunnable.java:110)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.run(ExecuteJobsRunnable.java:71)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-08-02 17:57:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "LAST_FAILURE_LOG_ID_" не найден
+Column "LAST_FAILURE_LOG_ID_" not found; SQL statement:
+update ACT_RU_JOB
+     SET REV_ =  ?,
+       EXECUTION_ID_ = ?,
+       LOCK_EXP_TIME_ = ?,
+       LOCK_OWNER_ = ?,
+       RETRIES_ = ?,
+       EXCEPTION_STACK_ID_ = ?,
+       EXCEPTION_MSG_ = ?,
+       FAILED_ACT_ID_ = ?,
+       DUEDATE_ = ?,
+       SUSPENSION_STATE_ = ?,
+       PROCESS_DEF_ID_ = ?,
+       PROCESS_DEF_KEY_ = ?,
+       JOB_DEF_ID_ = ?,
+       DEPLOYMENT_ID_ = ?,
+       HANDLER_CFG_ = ?,
+       PRIORITY_ = ?,
+       SEQUENCE_COUNTER_ = ?,
+       LAST_FAILURE_LOG_ID_ = ? 
+    where ID_= ?
+      and REV_ = ? [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.command.Parser.readTableColumn(Parser.java:1274)
+	at org.h2.command.Parser.parseUpdateSetClause(Parser.java:1325)
+	at org.h2.command.Parser.parseUpdate(Parser.java:1290)
+	at org.h2.command.Parser.parsePrepared(Parser.java:1005)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:337)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at jdk.internal.reflect.GeneratedMethodAccessor41.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy$TransactionAwareInvocationHandler.invoke(TransactionAwareDataSourceProxy.java:238)
+	at jdk.proxy2/jdk.proxy2.$Proxy71.prepareStatement(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.instantiateStatement(PreparedStatementHandler.java:86)
+	at org.apache.ibatis.executor.statement.BaseStatementHandler.prepare(BaseStatementHandler.java:88)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.prepare(RoutingStatementHandler.java:59)
+	at org.apache.ibatis.executor.BatchExecutor.doUpdate(BatchExecutor.java:70)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.camunda.bpm.engine.impl.db.sql.DbSqlSession.executeUpdate(DbSqlSession.java:402)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.updateEntity(BatchDbSqlSession.java:256)
+	at org.camunda.bpm.engine.impl.db.AbstractPersistenceSession.executeDbOperation(AbstractPersistenceSession.java:55)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.executeDbOperations(BatchDbSqlSession.java:62)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperations(DbEntityManager.java:341)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperationManager(DbEntityManager.java:323)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flush(DbEntityManager.java:295)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.flushSessions(CommandContext.java:272)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.close(CommandContext.java:188)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:119)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:72)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.ProcessApplicationContextInterceptor.execute(ProcessApplicationContextInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.CommandCounterInterceptor.execute(CommandCounterInterceptor.java:35)
+	at org.camunda.bpm.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:33)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.callFailedJobListenerWithRetries(ExecuteJobHelper.java:112)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.invokeJobListener(ExecuteJobHelper.java:93)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.executeJob(ExecuteJobHelper.java:74)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.executeJob(ExecuteJobsRunnable.java:110)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.run(ExecuteJobsRunnable.java:71)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-08-02 18:02:37 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "LAST_FAILURE_LOG_ID_" не найден
+Column "LAST_FAILURE_LOG_ID_" not found; SQL statement:
+update ACT_RU_JOB
+     SET REV_ =  ?,
+       EXECUTION_ID_ = ?,
+       LOCK_EXP_TIME_ = ?,
+       LOCK_OWNER_ = ?,
+       RETRIES_ = ?,
+       EXCEPTION_STACK_ID_ = ?,
+       EXCEPTION_MSG_ = ?,
+       FAILED_ACT_ID_ = ?,
+       DUEDATE_ = ?,
+       SUSPENSION_STATE_ = ?,
+       PROCESS_DEF_ID_ = ?,
+       PROCESS_DEF_KEY_ = ?,
+       JOB_DEF_ID_ = ?,
+       DEPLOYMENT_ID_ = ?,
+       HANDLER_CFG_ = ?,
+       PRIORITY_ = ?,
+       SEQUENCE_COUNTER_ = ?,
+       LAST_FAILURE_LOG_ID_ = ? 
+    where ID_= ?
+      and REV_ = ? [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.command.Parser.readTableColumn(Parser.java:1274)
+	at org.h2.command.Parser.parseUpdateSetClause(Parser.java:1325)
+	at org.h2.command.Parser.parseUpdate(Parser.java:1290)
+	at org.h2.command.Parser.parsePrepared(Parser.java:1005)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:337)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at jdk.internal.reflect.GeneratedMethodAccessor41.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy$TransactionAwareInvocationHandler.invoke(TransactionAwareDataSourceProxy.java:238)
+	at jdk.proxy2/jdk.proxy2.$Proxy71.prepareStatement(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.instantiateStatement(PreparedStatementHandler.java:86)
+	at org.apache.ibatis.executor.statement.BaseStatementHandler.prepare(BaseStatementHandler.java:88)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.prepare(RoutingStatementHandler.java:59)
+	at org.apache.ibatis.executor.BatchExecutor.doUpdate(BatchExecutor.java:70)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.camunda.bpm.engine.impl.db.sql.DbSqlSession.executeUpdate(DbSqlSession.java:402)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.updateEntity(BatchDbSqlSession.java:256)
+	at org.camunda.bpm.engine.impl.db.AbstractPersistenceSession.executeDbOperation(AbstractPersistenceSession.java:55)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.executeDbOperations(BatchDbSqlSession.java:62)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperations(DbEntityManager.java:341)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperationManager(DbEntityManager.java:323)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flush(DbEntityManager.java:295)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.flushSessions(CommandContext.java:272)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.close(CommandContext.java:188)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:119)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:72)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.ProcessApplicationContextInterceptor.execute(ProcessApplicationContextInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.CommandCounterInterceptor.execute(CommandCounterInterceptor.java:35)
+	at org.camunda.bpm.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:33)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.callFailedJobListenerWithRetries(ExecuteJobHelper.java:112)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.invokeJobListener(ExecuteJobHelper.java:93)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.executeJob(ExecuteJobHelper.java:74)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.executeJob(ExecuteJobsRunnable.java:110)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.run(ExecuteJobsRunnable.java:71)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-08-02 18:02:37 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "LAST_FAILURE_LOG_ID_" не найден
+Column "LAST_FAILURE_LOG_ID_" not found; SQL statement:
+update ACT_RU_JOB
+     SET REV_ =  ?,
+       EXECUTION_ID_ = ?,
+       LOCK_EXP_TIME_ = ?,
+       LOCK_OWNER_ = ?,
+       RETRIES_ = ?,
+       EXCEPTION_STACK_ID_ = ?,
+       EXCEPTION_MSG_ = ?,
+       FAILED_ACT_ID_ = ?,
+       DUEDATE_ = ?,
+       SUSPENSION_STATE_ = ?,
+       PROCESS_DEF_ID_ = ?,
+       PROCESS_DEF_KEY_ = ?,
+       JOB_DEF_ID_ = ?,
+       DEPLOYMENT_ID_ = ?,
+       HANDLER_CFG_ = ?,
+       PRIORITY_ = ?,
+       SEQUENCE_COUNTER_ = ?,
+       LAST_FAILURE_LOG_ID_ = ? 
+    where ID_= ?
+      and REV_ = ? [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.command.Parser.readTableColumn(Parser.java:1274)
+	at org.h2.command.Parser.parseUpdateSetClause(Parser.java:1325)
+	at org.h2.command.Parser.parseUpdate(Parser.java:1290)
+	at org.h2.command.Parser.parsePrepared(Parser.java:1005)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:337)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at jdk.internal.reflect.GeneratedMethodAccessor41.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy$TransactionAwareInvocationHandler.invoke(TransactionAwareDataSourceProxy.java:238)
+	at jdk.proxy2/jdk.proxy2.$Proxy71.prepareStatement(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.instantiateStatement(PreparedStatementHandler.java:86)
+	at org.apache.ibatis.executor.statement.BaseStatementHandler.prepare(BaseStatementHandler.java:88)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.prepare(RoutingStatementHandler.java:59)
+	at org.apache.ibatis.executor.BatchExecutor.doUpdate(BatchExecutor.java:70)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.camunda.bpm.engine.impl.db.sql.DbSqlSession.executeUpdate(DbSqlSession.java:402)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.updateEntity(BatchDbSqlSession.java:256)
+	at org.camunda.bpm.engine.impl.db.AbstractPersistenceSession.executeDbOperation(AbstractPersistenceSession.java:55)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.executeDbOperations(BatchDbSqlSession.java:62)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperations(DbEntityManager.java:341)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperationManager(DbEntityManager.java:323)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flush(DbEntityManager.java:295)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.flushSessions(CommandContext.java:272)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.close(CommandContext.java:188)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:119)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:72)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.ProcessApplicationContextInterceptor.execute(ProcessApplicationContextInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.CommandCounterInterceptor.execute(CommandCounterInterceptor.java:35)
+	at org.camunda.bpm.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:33)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.callFailedJobListenerWithRetries(ExecuteJobHelper.java:112)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.invokeJobListener(ExecuteJobHelper.java:93)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.executeJob(ExecuteJobHelper.java:74)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.executeJob(ExecuteJobsRunnable.java:110)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.run(ExecuteJobsRunnable.java:71)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-08-02 18:07:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "LAST_FAILURE_LOG_ID_" не найден
+Column "LAST_FAILURE_LOG_ID_" not found; SQL statement:
+update ACT_RU_JOB
+     SET REV_ =  ?,
+       EXECUTION_ID_ = ?,
+       LOCK_EXP_TIME_ = ?,
+       LOCK_OWNER_ = ?,
+       RETRIES_ = ?,
+       EXCEPTION_STACK_ID_ = ?,
+       EXCEPTION_MSG_ = ?,
+       FAILED_ACT_ID_ = ?,
+       DUEDATE_ = ?,
+       SUSPENSION_STATE_ = ?,
+       PROCESS_DEF_ID_ = ?,
+       PROCESS_DEF_KEY_ = ?,
+       JOB_DEF_ID_ = ?,
+       DEPLOYMENT_ID_ = ?,
+       HANDLER_CFG_ = ?,
+       PRIORITY_ = ?,
+       SEQUENCE_COUNTER_ = ?,
+       LAST_FAILURE_LOG_ID_ = ? 
+    where ID_= ?
+      and REV_ = ? [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.command.Parser.readTableColumn(Parser.java:1274)
+	at org.h2.command.Parser.parseUpdateSetClause(Parser.java:1325)
+	at org.h2.command.Parser.parseUpdate(Parser.java:1290)
+	at org.h2.command.Parser.parsePrepared(Parser.java:1005)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:337)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at jdk.internal.reflect.GeneratedMethodAccessor41.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy$TransactionAwareInvocationHandler.invoke(TransactionAwareDataSourceProxy.java:238)
+	at jdk.proxy2/jdk.proxy2.$Proxy71.prepareStatement(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.instantiateStatement(PreparedStatementHandler.java:86)
+	at org.apache.ibatis.executor.statement.BaseStatementHandler.prepare(BaseStatementHandler.java:88)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.prepare(RoutingStatementHandler.java:59)
+	at org.apache.ibatis.executor.BatchExecutor.doUpdate(BatchExecutor.java:70)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.camunda.bpm.engine.impl.db.sql.DbSqlSession.executeUpdate(DbSqlSession.java:402)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.updateEntity(BatchDbSqlSession.java:256)
+	at org.camunda.bpm.engine.impl.db.AbstractPersistenceSession.executeDbOperation(AbstractPersistenceSession.java:55)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.executeDbOperations(BatchDbSqlSession.java:62)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperations(DbEntityManager.java:341)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperationManager(DbEntityManager.java:323)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flush(DbEntityManager.java:295)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.flushSessions(CommandContext.java:272)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.close(CommandContext.java:188)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:119)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:72)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.ProcessApplicationContextInterceptor.execute(ProcessApplicationContextInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.CommandCounterInterceptor.execute(CommandCounterInterceptor.java:35)
+	at org.camunda.bpm.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:33)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.callFailedJobListenerWithRetries(ExecuteJobHelper.java:112)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.invokeJobListener(ExecuteJobHelper.java:93)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.executeJob(ExecuteJobHelper.java:74)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.executeJob(ExecuteJobsRunnable.java:110)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.run(ExecuteJobsRunnable.java:71)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+2022-08-02 18:07:42 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Столбец "LAST_FAILURE_LOG_ID_" не найден
+Column "LAST_FAILURE_LOG_ID_" not found; SQL statement:
+update ACT_RU_JOB
+     SET REV_ =  ?,
+       EXECUTION_ID_ = ?,
+       LOCK_EXP_TIME_ = ?,
+       LOCK_OWNER_ = ?,
+       RETRIES_ = ?,
+       EXCEPTION_STACK_ID_ = ?,
+       EXCEPTION_MSG_ = ?,
+       FAILED_ACT_ID_ = ?,
+       DUEDATE_ = ?,
+       SUSPENSION_STATE_ = ?,
+       PROCESS_DEF_ID_ = ?,
+       PROCESS_DEF_KEY_ = ?,
+       JOB_DEF_ID_ = ?,
+       DEPLOYMENT_ID_ = ?,
+       HANDLER_CFG_ = ?,
+       PRIORITY_ = ?,
+       SEQUENCE_COUNTER_ = ?,
+       LAST_FAILURE_LOG_ID_ = ? 
+    where ID_= ?
+      and REV_ = ? [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:703)
+	at org.h2.command.Parser.readTableColumn(Parser.java:1274)
+	at org.h2.command.Parser.parseUpdateSetClause(Parser.java:1325)
+	at org.h2.command.Parser.parseUpdate(Parser.java:1290)
+	at org.h2.command.Parser.parsePrepared(Parser.java:1005)
+	at org.h2.command.Parser.parse(Parser.java:843)
+	at org.h2.command.Parser.parse(Parser.java:815)
+	at org.h2.command.Parser.prepareCommand(Parser.java:738)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:76)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:352)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:337)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at jdk.internal.reflect.GeneratedMethodAccessor41.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy$TransactionAwareInvocationHandler.invoke(TransactionAwareDataSourceProxy.java:238)
+	at jdk.proxy2/jdk.proxy2.$Proxy71.prepareStatement(Unknown Source)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.instantiateStatement(PreparedStatementHandler.java:86)
+	at org.apache.ibatis.executor.statement.BaseStatementHandler.prepare(BaseStatementHandler.java:88)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.prepare(RoutingStatementHandler.java:59)
+	at org.apache.ibatis.executor.BatchExecutor.doUpdate(BatchExecutor.java:70)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.camunda.bpm.engine.impl.db.sql.DbSqlSession.executeUpdate(DbSqlSession.java:402)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.updateEntity(BatchDbSqlSession.java:256)
+	at org.camunda.bpm.engine.impl.db.AbstractPersistenceSession.executeDbOperation(AbstractPersistenceSession.java:55)
+	at org.camunda.bpm.engine.impl.db.sql.BatchDbSqlSession.executeDbOperations(BatchDbSqlSession.java:62)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperations(DbEntityManager.java:341)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flushDbOperationManager(DbEntityManager.java:323)
+	at org.camunda.bpm.engine.impl.db.entitymanager.DbEntityManager.flush(DbEntityManager.java:295)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.flushSessions(CommandContext.java:272)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContext.close(CommandContext.java:188)
+	at org.camunda.bpm.engine.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:119)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:72)
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140)
+	at org.camunda.bpm.engine.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.ProcessApplicationContextInterceptor.execute(ProcessApplicationContextInterceptor.java:70)
+	at org.camunda.bpm.engine.impl.interceptor.CommandCounterInterceptor.execute(CommandCounterInterceptor.java:35)
+	at org.camunda.bpm.engine.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:33)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.callFailedJobListenerWithRetries(ExecuteJobHelper.java:112)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.invokeJobListener(ExecuteJobHelper.java:93)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobHelper.executeJob(ExecuteJobHelper.java:74)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.executeJob(ExecuteJobsRunnable.java:110)
+	at org.camunda.bpm.engine.impl.jobexecutor.ExecuteJobsRunnable.run(ExecuteJobsRunnable.java:71)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
