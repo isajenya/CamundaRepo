@@ -4,13 +4,13 @@
     <bpmn:startEvent id="StartEvent_1" name="Tweet written" camunda:formKey="embedded:app:forms/Start.html">
       <bpmn:outgoing>Flow_1qoeuns</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1qoeuns" sourceRef="StartEvent_1" targetRef="Activity_19uspxt" />
+    <bpmn:sequenceFlow id="Flow_1qoeuns" sourceRef="StartEvent_1" targetRef="review_tweet" />
     <bpmn:exclusiveGateway id="Gateway_0xb6oh4" name="Tweet approved?">
       <bpmn:incoming>Flow_0cpjhj5</bpmn:incoming>
       <bpmn:outgoing>Flow_16pavxb</bpmn:outgoing>
       <bpmn:outgoing>Flow_0b0urib</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_0cpjhj5" sourceRef="Activity_19uspxt" targetRef="Gateway_0xb6oh4" />
+    <bpmn:sequenceFlow id="Flow_0cpjhj5" sourceRef="review_tweet" targetRef="Gateway_0xb6oh4" />
     <bpmn:sequenceFlow id="Flow_16pavxb" name="Yes" sourceRef="Gateway_0xb6oh4" targetRef="Activity_1hs0snp">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{approved == true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -18,10 +18,10 @@
       <bpmn:extensionElements />
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{approved == false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:endEvent id="Event_0nfgezq" name="Tweet rejected">
+    <bpmn:endEvent id="tweet_rejected" name="Tweet rejected">
       <bpmn:incoming>Flow_1vp2rcn</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1vp2rcn" sourceRef="Activity_0r4en32" targetRef="Event_0nfgezq" />
+    <bpmn:sequenceFlow id="Flow_1vp2rcn" sourceRef="Activity_0r4en32" targetRef="tweet_rejected" />
     <bpmn:endEvent id="Event_1tf5n65" name="Tweet published">
       <bpmn:incoming>Flow_1nxnwnc</bpmn:incoming>
     </bpmn:endEvent>
@@ -36,7 +36,7 @@
       <bpmn:incoming>Flow_16pavxb</bpmn:incoming>
       <bpmn:outgoing>Flow_1nxnwnc</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_19uspxt" name="Review tweet" camunda:formKey="embedded:app:forms/Review tweet.html" camunda:candidateGroups="management">
+    <bpmn:userTask id="review_tweet" name="Review tweet" camunda:formKey="embedded:app:forms/Review tweet.html" camunda:candidateGroups="management">
       <bpmn:incoming>Flow_1qoeuns</bpmn:incoming>
       <bpmn:outgoing>Flow_0cpjhj5</bpmn:outgoing>
     </bpmn:userTask>
@@ -86,7 +86,7 @@
           <dc:Bounds x="408" y="125" width="84" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0nfgezq_di" bpmnElement="Event_0nfgezq">
+      <bpmndi:BPMNShape id="Event_0nfgezq_di" bpmnElement="tweet_rejected">
         <dc:Bounds x="692" y="272" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="675" y="315" width="71" height="14" />
@@ -104,7 +104,7 @@
       <bpmndi:BPMNShape id="Activity_0d2hve2_di" bpmnElement="Activity_1hs0snp">
         <dc:Bounds x="530" y="140" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1ad87yb_di" bpmnElement="Activity_19uspxt">
+      <bpmndi:BPMNShape id="Activity_1ad87yb_di" bpmnElement="review_tweet">
         <dc:Bounds x="270" y="140" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>

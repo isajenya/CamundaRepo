@@ -24,7 +24,7 @@ public class ProcessJUnitTest {
     @Deployment(resources = "twitter-qa.bpmn")
     public void testHappyPath() {
 
-        Map<String , Object> variables = new HashMap<String, Object>();
+        Map<String, Object> variables = new HashMap<String, Object>();
         Random random = new Random();
         variables.put("content", "EX4_IS_" + random.nextInt());
         ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("TwitterQAProcess", variables);
@@ -55,6 +55,26 @@ public class ProcessJUnitTest {
 
         assertThat(processInstance).isNotNull();
         assertThat(processInstance).isEnded();
+    }
+
+
+    @Test
+    @Deployment(resources = "twitter-qa.bpmn")
+    public void testTweetRejected() {
+        Map<String, Object> varMap = new HashMap<String, Object>();
+        Random random = new Random();
+        varMap.put("content", "EX8_IS_" + random.nextInt());
+        varMap.put("approved", false);
+
+        ProcessInstance processInstance = runtimeService().
+                createProcessInstanceByKey("TwitterQAProcess")
+                .setVariables(varMap)
+                .startAfterActivity("review_tweet")
+                .execute();
+
+        assertThat(processInstance).isEnded().hasPassed(findId("tweet_rejected"));
+
+
     }
 
 }
