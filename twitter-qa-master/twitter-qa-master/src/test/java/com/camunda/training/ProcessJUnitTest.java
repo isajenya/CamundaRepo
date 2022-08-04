@@ -1,5 +1,6 @@
 package com.camunda.training;
 
+import org.camunda.bpm.dmn.engine.DmnDecisionTableResult;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
@@ -29,7 +30,7 @@ public class ProcessJUnitTest {
         variables.put("content", "EX4_IS_" + random.nextInt());
         ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("TwitterQAProcess", variables);
 
-        assertThat(processInstance).isWaitingAt("Activity_19uspxt");
+        assertThat(processInstance).isWaitingAt(findId("Review tweet"));
         List<Task> taskList = taskService()
                 .createTaskQuery()
                 .taskCandidateGroup("management")
@@ -72,9 +73,74 @@ public class ProcessJUnitTest {
                 .startAfterActivity("review_tweet")
                 .execute();
 
-        assertThat(processInstance).isEnded().hasPassed(findId("tweet_rejected"));
+        assertThat(processInstance)
+                .isWaitingAt(findId("Notify user of rejection"))
+                .externalTask()
+                .hasTopicName("notification");
+        complete(externalTask());
+
+        assertThat(processInstance).isEnded().hasPassed(findId("Tweet rejected"));
 
 
     }
+
+
+    @Test
+    @Deployment(resources = "twitter-qa.bpmn")
+    public void testSuperUserTweet() {
+        ProcessInstance processInstance = runtimeService()
+                .createMessageCorrelation("superuserTweet")
+                .setVariable("content", "ISJ11 " + System.currentTimeMillis())
+                .correlateWithResult()
+                .getProcessInstance();
+
+        assertThat(processInstance).isStarted();
+
+        /*runtimeService()
+                .createMessageCorrelation("tweetWithdrawn")
+                .correlateWithResult();*/
+
+        List<Job> jobList = jobQuery()
+                .processInstanceId(processInstance.getId())
+                .list();
+
+        assertThat(jobList).hasSize(1);
+        Job job = jobList.get(0);
+        execute(job);
+        assertThat(processInstance).isEnded();
+
+    }
+
+    @Test
+    @Deployment(resources = "twitter-qa.bpmn")
+    public void testTweetWithdrawn() {
+
+        Map<String, Object> varMap = new HashMap<>();
+
+        varMap.put("content", "Test tweetWithdrawn message");
+
+        ProcessInstance processInstance = runtimeService()
+                .startProcessInstanceByKey("TwitterQAProcess", varMap);
+        assertThat(processInstance).isStarted().isWaitingAt(findId("Review tweet"));
+
+        runtimeService()
+                .createMessageCorrelation("tweetWithdrawn")
+                .processInstanceVariableEquals("content", "Test tweetWithdrawn message")
+                .correlateWithResult();
+
+        assertThat(processInstance).isEnded();
+    }
+
+
+    /*@Test
+    @Deployment(resources = "tweetApproval.dmn")
+    public void testTweetFromJakob() {
+        Map<String, Object> variables = withVariables("email", "jakob.freund@camunda.com", "content", "this should be published");
+        DmnDecisionTableResult decisionResult = decisionService().evaluateDecisionTableByKey("tweetApproval", variables);
+
+        assertThat(decisionResult.getFirstResult()).contains(entry("approved", true));
+
+    }*/
+
 
 }
